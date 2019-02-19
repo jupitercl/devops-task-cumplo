@@ -1,0 +1,18 @@
+version: '3'
+services:
+  cumplo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - DB_IP=pgsqlcumplo.cbke1dbhizmz.us-west-1.rds.amazonaws.com
+      - DB_NAME=dbcumplo
+      - DB_USER=pgsqlcumplouser
+      - DB_PASS=pgsqlcumplopass
+      - GUNICORN_IP=0.0.0.0
+      - GUNICORN_PORT=80
+      - GUNICORN_WORKERS=4     
+    command: bash -c "python main.py"
+    ports:
+      - "80:80"
